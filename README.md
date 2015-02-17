@@ -1,3 +1,3 @@
 # Battleships Web:
 
-Gabe and Tom pairing on Makers Academy Week 3 project 
+[Gabe](https://github.com/GabeMaker) and [Tom](https://github.com/tomcoakes) pairing on Makers Academy Week 3 project 
