@@ -10,7 +10,6 @@ class Battleships < Sinatra::Base
   game = Game.new
 
   get '/' do
-    p game
     erb :index
   end
 
@@ -28,10 +27,6 @@ class Battleships < Sinatra::Base
         game.add_player(@player)
         erb :welcome
       end
-  end
-
-  get '/trial' do
-    erb :trial_board
   end
 
   # start the server if ruby file executed directly
