@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require_relative 'player'
 
 class Battleships < Sinatra::Base
 
@@ -13,10 +14,12 @@ class Battleships < Sinatra::Base
   end
 
   post '/new' do
-    @name = params[:name]
-      if @name.empty?
+    name = params[:name]
+      if name.empty?
         erb :new
       else
+        @player = Player.new
+        @player.name=(name)
         erb :welcome
       end
   end
