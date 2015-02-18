@@ -15,5 +15,5 @@ When(/^I press submit$/) do
 end
 
 Then(/^I should see "(.*?)"$/) do |welcome_message|
-  page.should have_content welcome_message
+  expect(page).to have_content welcome_message
 end
