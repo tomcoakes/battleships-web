@@ -1,0 +1,18 @@
+<table id="battleships_board">
+        <tr>
+            <td></td>   <!--  Gap in the upper left corner --> 
+            <% [*'A'..'J'].each do |col| %>
+                <td><%= col %></td>         
+            <% end %>
+        </tr>
+
+        <% [*1..10].each do |n| %>  
+            <tr>
+                <th><%= n %></th>
+                <% [*'A'..'J'].each do |l| %>
+                    <% joined = l+n.to_s %>
+                    <td id="<%= joined %>"> <%= joined %></td>
+                <% end %>
+            </tr>
+        <% end %>
+    </table>
