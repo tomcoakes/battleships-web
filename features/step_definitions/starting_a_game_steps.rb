@@ -6,7 +6,14 @@ When(/^I click "(.*?)"$/) do |arg1|
   click_link(arg1)
 end
 
+When(/^I enter my name as "(.*?)"$/) do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+When(/^I press submit$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
 Then(/^I should see "(.*?)"$/) do |arg1|
-  expect(page.has_content?(arg1)).to eq true
-  # (alternative statement - why does this not work?) expect­('/new').to have_c­ont­ent­("What's your name?")
+  pending # express the regexp above with the code you wish you had
 end
