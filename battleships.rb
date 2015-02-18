@@ -7,7 +7,10 @@ class Battleships < Sinatra::Base
   set :views, Proc.new { File.join(root, "views") }
   enable :sessions
 
+  game = Game.new
+
   get '/' do
+    p game
     erb :index
   end
 
@@ -22,6 +25,7 @@ class Battleships < Sinatra::Base
       else
         @player = Player.new
         @player.name=(name)
+        game.add_player(@player)
         erb :welcome
       end
   end
