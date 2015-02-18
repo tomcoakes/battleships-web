@@ -9,7 +9,7 @@ class Battleships < Sinatra::Base
   end
 
   get '/new' do
-    'What is your name?'
+    erb :new
   end
 
   # start the server if ruby file executed directly
