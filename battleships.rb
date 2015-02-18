@@ -1,9 +1,9 @@
 require 'sinatra/base'
-require_relative 'player'
+require_relative 'lib/player'
 
 class Battleships < Sinatra::Base
 
-  set :views, Proc.new { File.join(root, "..", "views") }
+  set :views, Proc.new { File.join(root, "views") }
 
   get '/' do
     erb :index
