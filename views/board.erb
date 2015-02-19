@@ -6,18 +6,9 @@
 
 
 <table>
-<% @grid %>
+<% @sliced = @grid.values.each_slice(2).to_a %>
+	<% @sliced %>
 </table>
-
-
-
-
-
-
-
-
-
-
 
 
 

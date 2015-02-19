@@ -9,6 +9,7 @@ class Battleships < Sinatra::Base
 
   board = Board.new(size: 2, content: Cell)
   ship = Ship.new(1)
+  p board.matrix
 
   get '/' do
     board.grid.values.each do |cell|
@@ -16,7 +17,6 @@ class Battleships < Sinatra::Base
     end
 
     random_coord = board.grid.keys.sample
-    p random_coord
     board.place(ship, random_coord)
     erb :index
   end

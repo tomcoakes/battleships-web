@@ -1,15 +1,15 @@
 class Board
-	attr_reader :grid
+  attr_reader :grid
 
-	def initialize(options)
-		@grid = {}
+  def initialize(options)
+    @grid = {}
     size = options[:size]
-		("A"..(size + 64).chr).each do |letter|
-			(1..size).each do |number|
-				@grid[(letter + number.to_s).to_sym] = options[:content].new
-			end
-		end
-	end
+    ("A"..(size + 64).chr).each do |letter|
+      (1..size).each do |number|
+        @grid[(letter + number.to_s).to_sym] = options[:content].new
+      end
+    end
+  end
 
   def shoot_at(coord)
     raise "You can't hit the same cell twice" if grid[coord].hit?
@@ -37,6 +37,10 @@ class Board
       cell.content.respond_to?(:sunk?)
     end.uniq
     !ship_cells.map(&:content).all?(&:sunk?)
+  end
+
+  def matrix
+    grid.values.each_slice(2).to_a
   end
 
 end
