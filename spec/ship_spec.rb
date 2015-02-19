@@ -1,57 +1,42 @@
 require 'ship'
 
 describe Ship do
-	let(:ship){Ship.new(1)}
+	let(:ship){Ship.new}
 
-	context "on initialize" do
-		it "can create a ship with a size" do
-			expect(ship.size).to eq 1
-		end
+	it "knows how big it is" do
+		expect(ship.length).to eq 3
 	end
 
-	it "can be hit" do 
-		ship.hit!
-		expect(ship.hits).to eq 1
+	it "knows that a submarine is 2" do
+		submarine = Ship.submarine
+		expect(submarine.length).to eq 2
 	end
 
-	it "is floating" do
-		expect(ship).to be_floating
-	end
-
-	it "can be sunk" do 
-		ship.hit!
-		expect(ship).to be_sunk 
-	end
-
-	it "isn't floating" do 
-		ship.hit!
-		expect(ship).not_to be_floating
-	end
-
-	it "can create an Aircraft carrier" do 
-		ac = Ship.aircraft_carrier
-		expect(ac.size).to eq 5
-	end
-
-	it "can create battleship" do 
-		battleship = Ship.battleship
-		expect(battleship.size).to eq 4
-	end
-
-	it "can create an destroyer" do 
-		destroyer = Ship.destroyer
-		expect(destroyer.size).to eq 3
-	end
-
-	it "can create an submarine" do 
-		sub = Ship.submarine
-		expect(sub.size).to eq 3
-	end
-
-	it "can create an patrol boat" do 
-		pb = Ship.patrol_boat
-		expect(pb.size).to eq 5
+	it "knows that its size is 2" do
+		submarine = Ship.submarine
+		expect(submarine.size).to eq 2
 	end
 
 
-end
+	it "knows that a aircraft_carrier has a length of 5" do
+		expect(Ship.aircraft_carrier.length).to eq 5
+	end
+
+	it "can be hit" do
+		ship.hit
+		expect(ship.send(:hits)).to eq 1
+	end
+
+	it "should know if a ship is not sunk" do
+		expect(ship).not_to be_sunk
+	end
+
+	it "should know if a ship is sunk when hit" do
+		ship = Ship.new(1)
+		ship.hit
+		expect(ship).to be_sunk
+	end
+
+
+
+ end

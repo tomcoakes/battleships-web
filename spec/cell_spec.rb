@@ -1,22 +1,26 @@
 require 'cell'
 
 describe Cell do
+
 	let(:cell){Cell.new}
-	let(:content){double :content, hit!: true}
-	before{cell.content = content}
+	let(:ship){double :ship}
 
 	it "can have content" do
-		expect(cell.content).to eq content
+		cell.content = ship
+		expect(cell.content).to eq ship
 	end
 
-	it "can shoot it's content" do
-		expect(content).to receive(:hit!)
-		cell.shoot
-	end
+  it "can be shot" do
+    cell.content = ship
+    allow(ship).to receive(:hit)
+    cell.shoot
+    expect(cell).to be_hit
+  end
 
-	it "knows when it's been hit" do
-		cell.shoot
-		expect(cell.hit?).to eq true 
-	end
+  it "hits its content once shot" do
+    cell.content = ship
+    expect(ship).to receive(:hit)
+    cell.shoot
 
+  end
 end

@@ -1,42 +1,36 @@
 class Ship
-	attr_reader :size
-	attr_accessor :hits
 
-	def initialize(size)
-		@size, @hits = size, 0
+	attr_reader :length
+
+	def initialize(length = 3)
+		@length = length
+		@hits = 0
 	end
 
-	def hit!
-		self.hits += 1
-		true
-	end
-
-	def sunk?
-		hits == size
-	end
-
-	def floating?
-		!sunk?
+	def self.submarine
+		new 2
 	end
 
 	def self.aircraft_carrier
 		new 5
 	end
 
-	def self.battleship
-		new 4
+	def hit
+		@hits += 1
 	end
 
-	def self.destroyer
-		new 3
+	def sunk?
+		hits >= length
 	end
 
-	def self.submarine
-		new 3
+	alias_method :size, :length
+
+private
+
+	def hits
+		@hits
 	end
 
-	def self.patrol_boat
-		new 5
-	end
+
 
 end

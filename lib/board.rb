@@ -1,67 +1,42 @@
 class Board
 	attr_reader :grid
 
-	def initialize(content)
+	def initialize(options)
 		@grid = {}
-		[*"A".."J"].each do |l|
-			[*1..10].each {|n| @grid["#{l}#{n}".to_sym] = content.new}
+    size = options[:size]
+		("A"..(size + 64).chr).each do |letter|
+			(1..size).each do |number|
+				@grid[(letter + number.to_s).to_sym] = options[:content].new
+			end
 		end
 	end
 
-	def place(ship, coord, orientation = :horizontally)
-		coords = [coord]
-		ship.size.times{coords << next_coord(coords.last, orientation)}
-		put_on_grid_if_possible(coords, ship)
-	end
+  def shoot_at(coord)
+    raise "You can't hit the same cell twice" if grid[coord].hit?
+    grid[coord].shoot
+  end
 
-	def floating_ships?
-		ships.any?(&:floating?)
-	end
+  def place(ship, coordinate, orientation = :horizontally)
+    get_coordinates(coordinate, ship.size, orientation).each do |coord|
+      grid[coord].content = ship
+    end
+  end
 
-	def shoot_at(coordinate)
-		raise "You cannot hit the same square twice" if  grid[coordinate].hit?
-		grid[coordinate].shoot
-	end
+  def get_coordinates(start, size, direction)
+    return_array = [start]
+    (size - 1).times {return_array << get_next(return_array.last, direction)}
+    return_array
+  end
 
-	def ships
-		grid.values.select{|cell|is_a_ship?(cell)}.map(&:content).uniq
-	end
+  def get_next(coord, direction)
+    direction == :horizontally ? coord.next : coord.to_s.reverse.next.reverse.to_sym
+  end
 
-	def ships_count
-		ships.count
-	end
-
-private
-
- 	def next_coord(coord, orientation)
-		orientation == :vertically ? next_vertical(coord) : coord.next
-	end
-
-	def next_vertical(coord)
-		coord.to_s.reverse.next.reverse.to_sym
-	end
-
-	def is_a_ship?(cell)
-		cell.content.respond_to?(:sunk?) 
-	end
-
-	def any_coord_not_on_grid?(coords)
-		(grid.keys & coords) != coords
-	end
-
-	def any_coord_is_already_a_ship?(coords)
-		coords.any?{|coord| is_a_ship?(grid[coord])}
-	end
-
-	def raise_errors_if_cant_place_ship(coords)
-		raise "You cannot place a ship outside of the grid" if any_coord_not_on_grid?(coords)
-		raise "You cannot place a ship on another ship" if any_coord_is_already_a_ship?(coords)
-	end
-
-	def put_on_grid_if_possible(coords, ship)
-		raise_errors_if_cant_place_ship(coords)
-		coords.each{|coord|grid[coord].content = ship}
-	end
+  def floating_ships?
+    ship_cells = grid.values.select do|cell|
+      cell.content.respond_to?(:sunk?)
+    end.uniq
+    !ship_cells.map(&:content).all?(&:sunk?)
+  end
 
 end
-
