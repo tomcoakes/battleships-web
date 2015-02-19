@@ -7,12 +7,12 @@ Feature: Starting the game
 		Given I am on the homepage
 		When I click "New Game"
 		And I enter my name as "Gabe"
-		And I press submit
-		Then I should see "Welcome to battleships Gabe"
+		And I push "submit"
+		Then I should see "Gabe is now playing Battleships"
 
 	Scenario: User doesn't enter name
 		Given I am on the homepage
 		When I click "New Game"
-		And I press submit
+		And I push "submit"
 		Then I should see "Name"
 		

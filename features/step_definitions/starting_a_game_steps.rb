@@ -10,8 +10,8 @@ When(/^I enter my name as "(.*?)"$/) do |name|
   fill_in('name', :with => "Gabe")
 end
 
-When(/^I press submit$/) do
-  click_button('submit')
+When(/^I push "(.*?)"$/) do |button|
+  click_button(button)
 end
 
 Then(/^I should see "(.*?)"$/) do |welcome_message|
