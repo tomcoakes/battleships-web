@@ -8,9 +8,11 @@ class Battleships < Sinatra::Base
 
   board = Board.new(size: 2, content: Cell)
   ship = Ship.new(1)
-  board.place(ship, :A2)
 
   get '/' do
+  random_coord = board.grid.keys.sample
+  p random_coord
+  board.place(ship, random_coord)
     erb :index
   end
 
