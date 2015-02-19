@@ -16,3 +16,8 @@ Feature: Starting the game
 		And I press submit
 		Then I should see "Name"
 		
+	Scenario: User can shoot at a cell without a ship
+		Given I have registered
+		When I enter a coordinate
+		And I press shoot
+		Then I should see "You missed!"
