@@ -1,5 +1,6 @@
 <%= @name %> is now playing Battleships
 
+<p>Take a shot!</p>
 
 <%= @grid %>
 
@@ -7,3 +8,9 @@
 <input type='text' name='target'></input>
 <input type='submit' value="shoot"> </input>
 </form>
+
+<% if @hit %>
+	<p>You hit the ship!</p>
+<% else %>
+	<p>You missed!</p>
+<% end %>

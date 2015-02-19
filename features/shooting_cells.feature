@@ -10,10 +10,11 @@ Feature: Shooting at cells
 		And I push "submit"
 		Then I should see "Gabe is now playing Battleships"
 
-	Scenario: User can shoot at a cell without a ship
+	Scenario: User can shoot at a cell without a ship and take another shot
 		When I enter "A1"
 		And I push "shoot"
 		Then I should see "You missed!"
+		Then I should see "Take a shot!"
 
 	Scenario: User can shoot at a cell with a ship
 		When I enter "A2"

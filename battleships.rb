@@ -30,11 +30,13 @@ class Battleships < Sinatra::Base
   end
 
   post '/shot' do
+      @hit ||= false
     if board.grid[params[:target].to_sym].content.is_a? Ship
-      "You hit the ship!"
+      @hit = true
     else
-      "You missed!"
+      @hit = false
     end
+    erb :board
   end
 
   # start the server if ruby file executed directly

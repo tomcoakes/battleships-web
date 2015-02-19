@@ -14,6 +14,6 @@ When(/^I push "(.*?)"$/) do |button|
   click_button(button)
 end
 
-Then(/^I should see "(.*?)"$/) do |welcome_message|
-  expect(page).to have_content welcome_message
+Then(/^I should see "(.*?)"$/) do |content|
+  expect(page).to have_content content
 end
