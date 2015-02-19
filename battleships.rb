@@ -10,9 +10,12 @@ class Battleships < Sinatra::Base
   ship = Ship.new(1)
 
   get '/' do
-  random_coord = board.grid.keys.sample
-  p random_coord
-  board.place(ship, random_coord)
+    board = Board.new(size: 2, content: Cell)
+    ship = Ship.new(1)
+
+    random_coord = board.grid.keys.sample
+    p random_coord
+    board.place(ship, random_coord)
     erb :index
   end
 
