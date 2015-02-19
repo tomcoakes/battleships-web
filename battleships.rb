@@ -1,11 +1,14 @@
 require 'sinatra/base'
 require_relative './lib/board'
 require_relative './lib/cell'
+require_relative './lib/ship'
 
 class Battleships < Sinatra::Base
   set :views, Proc.new { File.join(root, "views") }
 
   board = Board.new(size: 2, content: Cell)
+  ship = Ship.new(1)
+  board.place(ship, :A2)
 
   get '/' do
     erb :index
@@ -21,13 +24,13 @@ class Battleships < Sinatra::Base
         erb :new
       else
         @grid = board.grid
+        puts @grid 
         erb :board
       end
   end
 
   post '/shot' do
-    hit = false
-    if hit
+    if board.grid[params[:target].to_sym].content.is_a? Ship
       "You hit the ship!"
     else
       "You missed!"
