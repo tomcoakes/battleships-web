@@ -1,8 +1,11 @@
 require 'sinatra/base'
+require_relative './lib/board'
+require_relative './lib/cell'
 
 class Battleships < Sinatra::Base
-
   set :views, Proc.new { File.join(root, "views") }
+
+  board = Board.new(size: 2, content: Cell)
 
   get '/' do
     erb :index
@@ -17,7 +20,8 @@ class Battleships < Sinatra::Base
       if @name.empty?
         erb :new
       else
-        erb :welcome
+        @grid = board.grid
+        erb :board
       end
   end
 
