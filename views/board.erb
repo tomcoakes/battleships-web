@@ -1,14 +1,8 @@
-<%= @name %> is now playing Battleships
+<%= @player.name %> is now playing Battleships
 
 <p>Take a shot!</p>
 
 <%= @grid %>
-
-
-<table>
-<% @sliced = @grid.values.each_slice(2).to_a %>
-	<% @sliced %>
-</table>
 
 
 
