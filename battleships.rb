@@ -2,6 +2,7 @@ require 'sinatra/base'
 require_relative './lib/board'
 require_relative './lib/cell'
 require_relative './lib/ship'
+require_relative './lib/water'
 
 class Battleships < Sinatra::Base
   set :views, Proc.new { File.join(root, "views") }
@@ -10,8 +11,9 @@ class Battleships < Sinatra::Base
   ship = Ship.new(1)
 
   get '/' do
-    board = Board.new(size: 2, content: Cell)
-    ship = Ship.new(1)
+    board.grid.values.each do |cell|
+      cell.content = Water.new
+    end
 
     random_coord = board.grid.keys.sample
     p random_coord
