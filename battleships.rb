@@ -24,13 +24,11 @@ class Battleships < Sinatra::Base
         erb :new
       else
         @grid = board.grid
-        puts @grid 
         erb :board
       end
   end
 
   post '/shot' do
-      @hit ||= false
     if board.grid[params[:target].to_sym].content.is_a? Ship
       @hit = true
     else
