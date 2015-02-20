@@ -9,7 +9,6 @@ class Battleships < Sinatra::Base
 
   board = Board.new(size: 2, content: Cell)
   ship = Ship.new(1)
-  p board.matrix
 
   get '/' do
     board.grid.values.each do |cell|
@@ -30,7 +29,7 @@ class Battleships < Sinatra::Base
       if @name.empty?
         erb :new
       else
-        @grid = board.grid
+        @grid = board.matrix
         erb :board
       end
   end

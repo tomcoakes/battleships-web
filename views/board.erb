@@ -1,16 +1,28 @@
 <%= @name %> is now playing Battleships
 
-<p>Take a shot!</p>
+<style>
+	table {
+    	border-collapse: collapse;
+	}
+	table, th, td {
+		border: 1px solid black;
+	}
+</style>
 
-<%= @grid %>
+
+<p>Take a shot!</p>
 
 
 <table>
-<% @sliced = @grid.values.each_slice(2).to_a %>
-	<% @sliced %>
+	<% @grid.each do |row| %>
+		<tr><% row.each do |cell| %></tr>
+			<td>~</td>
+			<td>~</td>
+		<% end %>
+	<% end %>
 </table>
 
-
+<br />
 
 <form action='/shot' method='post'>
 <input type='text' name='target'></input>
